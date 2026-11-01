@@ -1,5 +1,7 @@
 
-from src.modules.product import Product                                                                                                                                                                                                                                                                 
+from src.modules.product import Product  
+from src.modules.physicalProduct import PhysicalProduct
+from src.modules.digitalProduct import DigitalProduct                                                                                                                                                                                                                                                         
 from src.modules.inventory import Inventory 
 from src.modules.fileHandler import FileHandler
 from src.utils.check_user_input import check_user_input
@@ -7,12 +9,8 @@ from src.utils.check_user_input import check_user_input
 # inventory_data = display_all()
 inventory = Inventory()
 fileHandler = FileHandler()
-saved_data = fileHandler.load_data()                                                                                                                                                                                                                                                   
 
-if saved_data:                                                                                                                                                                                                                                                                         
-    for item in saved_data:                                                                                                                                                                                                                                                              
-        product = Product(item["id"], item["name"], item["price"], item["stock"])                                                                                                                                                                                                          
-        inventory.add_product(product) 
+fileHandler.load_data(inventory)
 
 while True:
     # the list will host product dict
@@ -46,25 +44,48 @@ while True:
                 "Current Inventory\n"
                 "--------------------------------------------------------"
                 )
-            if not fileHandler.load_data():
+            if not inventory.products:                
                 print("Inventory Not found") 
             else:
                 inventory.display_products()
 
         elif check_user_input(user_option) == "2":
+
             print("\nAdd New Product\n")
+            print("Select Product Type:")
+            print("1. Physical Product")
+            print("2. Digital Product")
+            product_type = input("Enter choice (1/2): ").strip()
+
+            if product_type not in ("1", "2"):
+                print("Invalid product type selected. Returning to menu.")
+                continue   
             product_id = input("Product ID: ").strip().upper()
             product_name = input("Product Name: ").strip()
-
-            # Convert price to float and stock to int
             price = float(input("Price: "))
             stock = int(input("Stock Quantity: "))
+            if product_type == "1": 
+                weight = float(input("Weight: "))
 
-            new_product = Product(product_id, product_name, price, stock)
-
+                new_product = PhysicalProduct(
+                    product_id,
+                    product_name,
+                    price,
+                    stock,
+                    weight
+                )
+            # print(inventory.display_products())
+            else: 
+                #digital
+                download_size = float(input("Download Size: "))
+                new_product = DigitalProduct(
+                    product_id,
+                    product_name,
+                    price,
+                    stock,
+                    download_size
+                )
             inventory.add_product(new_product)
-            
-            print(inventory.display_products())
 
         elif check_user_input(user_option) == "3":
             print("Update Stock")

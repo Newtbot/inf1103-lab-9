@@ -12,7 +12,9 @@
 # displaying its information
 
 
-from src.modules.product import Product                                                                                                                                                                                                                                                                 
+from src.modules.product import Product   
+from src.modules.canBeShipped import CanBeShipped  
+
 
 class PhysicalProduct(Product): 
     def __init__(self, product_id: str, name: str , price: float, stock: int ,weight: float):
@@ -34,6 +36,14 @@ class PhysicalProduct(Product):
     def display_information(self) -> None:
         super().display_information()          
         print(f"Weight: {self.weight:.2f} kg")
- 
 
+    #method override.. they always read child class than adult methods
+    def to_dict(self) -> dict: 
+        data = super().to_dict()
+        data["type"] = "physical"
+        data["weight"] = self.weight
+        return data
+ 
+    def get_fulfillment_info() -> None:
+        pass
 

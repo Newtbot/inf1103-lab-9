@@ -11,7 +11,7 @@
 # Test your class by creating a DigitalProduct object and displaying its information.
 
 
-from src.modules.product import Product   
+from src.modules.product import Product 
 import pathlib                                                                                                                                                                                                                                                              
 
 class DigitalProduct(Product): 
@@ -36,4 +36,12 @@ class DigitalProduct(Product):
         super().display_information()          
         print(f"Download Size: {file_size_mb:.2f} MB")
 
+    #method override.. they always read child class than adult methods
+    def to_dict(self) -> dict: 
+        data = super().to_dict()
+        data["type"] = "digital"
+        data["download_size"] = self.download_size
+        return data
 
+    def get_fulfillment_info() -> None:
+        pass

@@ -1,29 +1,3 @@
-# class User:
-#     def __init__(self, username: str, email: str):
-#         # Instance attributes
-#         self.username = username
-#         self.email = email
-#         self.is_active = True
-
-#     # Instance method
-#     def deactivate(self) -> None:
-#         self.is_active = False
-
-#     # String representation for printing/debugging
-#     def __repr__(self) -> str:
-#         return f"User(username='{self.username}', active={self.is_active})"
-
-
-# # Creating an instance (instantiation)
-# user1 = User("alice", "alice@example.com")
-# print(user1.username)    # Output: alice
-
-# user1.deactivate()
-# print(user1.is_active)   # Output: False
-# print(user1)             # Output: User(username='alice', active=False)
-
-
-
 #only handle product obj?
 # - __product_id:String
 # - __name:String
@@ -37,7 +11,10 @@
 # # = protected
 
 #void is there to represent it doesnt return the data..
-class Product:
+
+from abc import ABC, abstractmethod
+
+class Product(ABC):
     def __init__(self, product_id: str, name: str , price: float, stock: int ):
         self.__product_id = product_id
         self.__name = name
@@ -60,9 +37,9 @@ class Product:
     def stock(self) -> int:
         return self.__stock
 
-    # def get_id(self) ->  str: 
-    #     return self.__product_id
-
+    @abstractmethod
+    def get_fulfillment_info():
+        pass
 
     #methods go here
     def update_stock(self, quantity: int) -> None:
@@ -83,8 +60,8 @@ class Product:
 
     def to_dict(self) -> dict:                                                                                                                                                                                                                                                         
         return {                                                                                                                                                                                                                                                                       
-                "id": self.__product_id,                                                                                                                                                                                                                                                   
-                "name": self.__name,                                                                                                                                                                                                                                                       
-                "price": self.__price,                                                                                                                                                                                                                                                     
-                "stock": self.__stock,                                                                                                                                                                                                                                                     
+                "id": self.product_id,                                                                                                                                                                                                                                                   
+                "name": self.name,                                                                                                                                                                                                                                                       
+                "price": self.price,                                                                                                                                                                                                                                                     
+                "stock": self.stock,                                                                                                                                                                                                                                                     
             } 
