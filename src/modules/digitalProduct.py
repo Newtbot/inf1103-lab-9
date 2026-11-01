@@ -43,5 +43,5 @@ class DigitalProduct(Product):
         data["download_size"] = self.download_size
         return data
 
-    def get_fulfillment_info() -> None:
-        pass
+    def get_fulfillment_info(self) -> None:
+        return f"Nothing to shipped. Its a digital Product."

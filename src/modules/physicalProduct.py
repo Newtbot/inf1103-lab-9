@@ -16,7 +16,7 @@ from src.modules.product import Product
 from src.modules.canBeShipped import CanBeShipped  
 
 
-class PhysicalProduct(Product): 
+class PhysicalProduct(Product, CanBeShipped): 
     def __init__(self, product_id: str, name: str , price: float, stock: int ,weight: float):
         # In Python, super() function is used to call methods from a parent (superclass) 
         # inside a child (subclass). It allows to extend or override inherited methods 
@@ -44,6 +44,11 @@ class PhysicalProduct(Product):
         data["weight"] = self.weight
         return data
  
-    def get_fulfillment_info() -> None:
-        pass
+    def get_fulfillment_info(self) -> None:
+        return f"Shipped via postal courier. Weight: {self.weight:.2f} kg."
+
+    def calculate_shipping_cost(self) -> float:
+            rate_per_kg = 2.0
+            return self.weight * rate_per_kg
+
 
