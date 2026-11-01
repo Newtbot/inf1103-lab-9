@@ -14,5 +14,13 @@
         "stock": 100,
         "type": "digital",
         "download_size": 10000.0
+    },
+    {
+        "id": "P003",
+        "name": "INF1102",
+        "price": 100.0,
+        "stock": 100,
+        "type": "digital",
+        "download_size": 10000000.0
     }
 ]
