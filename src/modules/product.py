@@ -71,18 +71,15 @@ class Product:
         self.__stock = quantity
 
 
-    def get_details(self) -> str:
-            """Returns the base product string so subclasses can extend it (OCP)."""
-            return (
+    def display_information(self) -> None:
+            # Prints common info; end=" | " lets the child continue on the same line
+            print(
                 f"ID: {self.product_id} | "
                 f"Name: {self.name} | "
-                f"Price: ${self.price:.2f} | "
-                f"Stock: {self.stock}"
-        )
-
-    # once __init__ finsihes it will destroy name price etc. hence we must use self_ .. to access the var
-    def display_information(self) -> None: 
-        print(self.get_details())
+                f"Price: ${float(self.price):.2f} | "
+                f"Stock: {self.stock}",
+                end=" | "
+            )
 
     def to_dict(self) -> dict:                                                                                                                                                                                                                                                         
         return {                                                                                                                                                                                                                                                                       

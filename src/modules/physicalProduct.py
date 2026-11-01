@@ -31,12 +31,9 @@ class PhysicalProduct(Product):
     def weight(self) -> float: 
         return self._weight
 
-
-    def get_details(self) -> str:
-            return f"{super().get_details()} | Weight: {self.weight:.2f} kg"
-
     def display_information(self) -> None:
-        print(self.get_details())
+        super().display_information()          
+        print(f"Weight: {self.weight:.2f} kg")
  
 
 

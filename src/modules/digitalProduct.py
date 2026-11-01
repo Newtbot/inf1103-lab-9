@@ -30,11 +30,10 @@ class DigitalProduct(Product):
     def download_size(self) -> float: 
         return self._download_size
 
-    def get_details(self) -> str:
-        file_size_mb = self._download_size / (1024 * 1024)
-        return f"{super().get_details()} | Download Size: {file_size_mb:.2f} MB"
-
     def display_information(self) -> None:
-        print(self.get_details())
+        file_size_mb = self._download_size / (1024 * 1024)
+
+        super().display_information()          
+        print(f"Download Size: {file_size_mb:.2f} MB")
 
 
